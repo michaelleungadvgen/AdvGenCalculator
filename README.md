@@ -1,3 +1,5 @@
+Buy Me a Coffee : https://buymeacoffee.com/advgen
+
 # AdvGen Calculator
 
 A modern, dual-mode calculator built with .NET 9 and MAUI for Windows UI.
