@@ -2,7 +2,7 @@
 
 A modern, dual-mode calculator built with .NET 9 and MAUI for Windows UI.
 
-![AdvGen Calculator Screenshot][(https://raw.githubusercontent.com/username/AdvGenCalculator/main/screenshot.png](https://github.com/user-attachments/assets/3108db7c-78d9-48a7-be70-8273fc7cf22b))
+![AdvGen Calculator Screenshot](https://github.com/user-attachments/assets/3108db7c-78d9-48a7-be70-8273fc7cf22b)
 
 
 ## Overview
