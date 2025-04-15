@@ -1,0 +1,185 @@
+﻿
+ <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AdvGenCalculator"
+             x:Class="AdvGenCalculator.MainPage"
+             BackgroundColor="White">
+
+    <ContentPage.Resources>
+        <local:BoolToModeNameConverter x:Key="ModeNameConverter" />
+    </ContentPage.Resources>
+
+    <Grid Padding="20" RowSpacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header with title and mode toggle -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0"
+                   Text="AdvGen Calculator"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   VerticalOptions="Center" />
+
+            <HorizontalStackLayout Grid.Column="1" Spacing="10">
+                <Label Text="Mode:" VerticalOptions="Center" />
+                <Switch x:Name="ModeSwitch" 
+                        Toggled="OnModeSwitchToggled"
+                        VerticalOptions="Center" />
+                <Label Text="{Binding IsScientificMode, Converter={StaticResource ModeNameConverter}}"
+                       VerticalOptions="Center" />
+            </HorizontalStackLayout>
+        </Grid>
+
+        <!-- Display Area -->
+        <Border Grid.Row="1"
+                Stroke="LightGray"
+                StrokeThickness="1"
+                Padding="10"
+                BackgroundColor="#F0F0F0">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="8" />
+            </Border.StrokeShape>
+
+            <VerticalStackLayout>
+                <Label Text="{Binding Expression}"
+                       FontSize="16"
+                       TextColor="Gray"
+                       HorizontalOptions="End" />
+                <Label Text="{Binding CurrentValue}"
+                       FontSize="32"
+                       FontAttributes="Bold"
+                       HorizontalOptions="End" />
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- Calculator Buttons -->
+        <Grid Grid.Row="2" RowSpacing="5" ColumnSpacing="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"  />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Scientific Buttons (First Row) -->
+            <Button Text="sin" Grid.Row="0" Grid.Column="0" 
+                    Style="{StaticResource FunctionButtonStyle}"
+                    IsVisible="{Binding IsScientificMode}"
+                    Clicked="OnCalculatorButtonClicked" />
+            <Button Text="cos" Grid.Row="0" Grid.Column="1" 
+                    Style="{StaticResource FunctionButtonStyle}"
+                    IsVisible="{Binding IsScientificMode}"
+                    Clicked="OnCalculatorButtonClicked" />
+            <Button Text="tan" Grid.Row="0" Grid.Column="2" 
+                    Style="{StaticResource FunctionButtonStyle}"
+                    IsVisible="{Binding IsScientificMode}"
+                    Clicked="OnCalculatorButtonClicked" />
+            <Button Text="√" Grid.Row="0" Grid.Column="3" 
+                    Style="{StaticResource FunctionButtonStyle}"
+                    IsVisible="{Binding IsScientificMode}"
+                    Clicked="OnCalculatorButtonClicked" />
+            <Button Text="^" Grid.Row="0" Grid.Column="4" 
+                    Style="{StaticResource FunctionButtonStyle}"
+                    IsVisible="{Binding IsScientificMode}"
+                    Clicked="OnCalculatorButtonClicked" />
+
+            <!-- Row 1 -->
+            <Button Text="C" Grid.Row="1" Grid.Column="0" 
+                    Style="{StaticResource ClearButtonStyle}"
+                    Clicked="OnCalculatorButtonClicked" />
+            <Button Text="CE" Grid.Row="1" Grid.Column="1" 
+                    Style="{StaticResource ClearButtonStyle}"
+                    Clicked="OnCalculatorButtonClicked" />
+            <Button Text="(" Grid.Row="1" Grid.Column="2" 
+                    Style="{StaticResource FunctionButtonStyle}"
+                    IsVisible="{Binding IsScientificMode}"
+                    Clicked="OnCalculatorButtonClicked" />
+            <Button Text=")" Grid.Row="1" Grid.Column="3" 
+                    Style="{StaticResource FunctionButtonStyle}"
+                    IsVisible="{Binding IsScientificMode}"
+                    Clicked="OnCalculatorButtonClicked" />
+            <Button Text="÷" Grid.Row="1" Grid.Column="4" 
+                    Style="{StaticResource OperatorButtonStyle}"
+                    Clicked="OnCalculatorButtonClicked" />
+
+            <!-- Row 2 -->
+            <Button Text="7" Grid.Row="2" Grid.Column="0" 
+                    Style="{StaticResource NumberButtonStyle}"
+                    Clicked="OnCalculatorButtonClicked" />
+            <Button Text="8" Grid.Row="2" Grid.Column="1" 
+                    Style="{StaticResource NumberButtonStyle}"
+                    Clicked="OnCalculatorButtonClicked" />
+            <Button Text="9" Grid.Row="2" Grid.Column="2" 
+                    Style="{StaticResource NumberButtonStyle}"
+                    Clicked="OnCalculatorButtonClicked" />
+            <Button Text="⌫" Grid.Row="2" Grid.Column="3" 
+                    Style="{StaticResource ClearButtonStyle}"
+                    Clicked="OnCalculatorButtonClicked" />
+            <Button Text="×" Grid.Row="2" Grid.Column="4" 
+                    Style="{StaticResource OperatorButtonStyle}"
+                    Clicked="OnCalculatorButtonClicked" />
+
+            <!-- Row 3 -->
+            <Button Text="4" Grid.Row="3" Grid.Column="0" 
+                    Style="{StaticResource NumberButtonStyle}"
+                    Clicked="OnCalculatorButtonClicked" />
+            <Button Text="5" Grid.Row="3" Grid.Column="1" 
+                    Style="{StaticResource NumberButtonStyle}"
+                    Clicked="OnCalculatorButtonClicked" />
+            <Button Text="6" Grid.Row="3" Grid.Column="2" 
+                    Style="{StaticResource NumberButtonStyle}"
+                    Clicked="OnCalculatorButtonClicked" />
+            <Button Text="%" Grid.Row="3" Grid.Column="3" 
+                    Style="{StaticResource FunctionButtonStyle}"
+                    Clicked="OnCalculatorButtonClicked" />
+            <Button Text="-" Grid.Row="3" Grid.Column="4" 
+                    Style="{StaticResource OperatorButtonStyle}"
+                    Clicked="OnCalculatorButtonClicked" />
+
+            <!-- Row 4 -->
+            <Button Text="1" Grid.Row="4" Grid.Column="0" 
+                    Style="{StaticResource NumberButtonStyle}"
+                    Clicked="OnCalculatorButtonClicked" />
+            <Button Text="2" Grid.Row="4" Grid.Column="1" 
+                    Style="{StaticResource NumberButtonStyle}"
+                    Clicked="OnCalculatorButtonClicked" />
+            <Button Text="3" Grid.Row="4" Grid.Column="2" 
+                    Style="{StaticResource NumberButtonStyle}"
+                    Clicked="OnCalculatorButtonClicked" />
+            <Button Text="." Grid.Row="4" Grid.Column="3" 
+                    Style="{StaticResource NumberButtonStyle}"
+                    Clicked="OnCalculatorButtonClicked" />
+            <Button Text="+" Grid.Row="4" Grid.Column="4" 
+                    Style="{StaticResource OperatorButtonStyle}"
+                    Clicked="OnCalculatorButtonClicked" />
+
+            <!-- Equal Button Spanning Two Columns -->
+            <Button Text="0" Grid.Row="5" Grid.ColumnSpan="3" 
+          Style="{StaticResource NumberButtonStyle}"
+          Clicked="OnCalculatorButtonClicked" />
+            <Button Text="=" Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2"
+                    Style="{StaticResource OperatorButtonStyle}"
+                    Clicked="OnCalculatorButtonClicked"
+                    IsVisible="true" />
+            <!-- Alternative layout option -->
+        </Grid>
+    </Grid>
+</ContentPage>
