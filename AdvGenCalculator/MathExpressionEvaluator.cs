@@ -35,6 +35,8 @@ namespace AdvGenCalculator
             var tanRegex = new Regex(@"tan\s*\(([^)]+)\)");
             var sqrtRegex = new Regex(@"sqrt\s*\(([^)]+)\)");
 
+            // Fixing the missing ")"
+            expression = AutoCloseParentheses(expression);
             // Process each function
             expression = ProcessFunction(expression, sinRegex, arg => Math.Sin(double.Parse(arg) * Math.PI / 180));
             expression = ProcessFunction(expression, cosRegex, arg => Math.Cos(double.Parse(arg) * Math.PI / 180));
@@ -44,6 +46,20 @@ namespace AdvGenCalculator
             // Handle exponentiation (^)
             expression = HandleExponentiation(expression);
 
+            return expression;
+        }
+
+        private static string AutoCloseParentheses(string expression)
+        {
+            int open = 0, close = 0;
+            foreach (char c in expression)
+            {
+                if (c == '(') open++;
+                else if (c == ')') close++;
+            }
+            int missing = open - close;
+            if (missing > 0)
+                expression += new string(')', missing);
             return expression;
         }
 
