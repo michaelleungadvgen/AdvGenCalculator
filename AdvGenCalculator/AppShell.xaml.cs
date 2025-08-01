@@ -1,4 +1,3 @@
-﻿// AppShell.xaml.cs
 using Microsoft.Maui.Controls;
 
 namespace AdvGenCalculator

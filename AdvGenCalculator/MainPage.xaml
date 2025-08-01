@@ -6,7 +6,9 @@
              BackgroundColor="White">
 
     <ContentPage.Resources>
-        <local:BoolToModeNameConverter x:Key="ModeNameConverter" />
+        <ResourceDictionary>
+            <converters:BoolToModeNameConverter x:Key="ModeNameConverter" xmlns:converters="clr-namespace:AdvGenCalculator.Converters" />
+        </ResourceDictionary>
     </ContentPage.Resources>
 
     <Grid Padding="20" RowSpacing="10">

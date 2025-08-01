@@ -1,4 +1,4 @@
-﻿namespace AdvGenCalculator
+namespace AdvGenCalculator
 {
     public partial class App : Application
     {

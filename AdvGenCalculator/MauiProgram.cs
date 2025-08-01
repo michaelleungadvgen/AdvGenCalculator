@@ -1,7 +1,8 @@
-﻿// MauiProgram.cs
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Hosting;
+using AdvGenCalculator.Services;
+using AdvGenCalculator.ViewModels;
 
 namespace AdvGenCalculator
 {
@@ -17,6 +18,12 @@ namespace AdvGenCalculator
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+
+            // Register services
+            builder.Services.AddSingleton<IExpressionTokenizer, ExpressionTokenizer>();
+            builder.Services.AddSingleton<IExpressionEvaluator, ShuntingYardExpressionEvaluator>();
+            builder.Services.AddSingleton<ICalculatorViewModel, ImprovedCalculatorViewModel>();
+            builder.Services.AddSingleton<MainPage>();
 
 #if DEBUG
             builder.Logging.AddDebug();

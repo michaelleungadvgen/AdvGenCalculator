@@ -1,13 +1,28 @@
-﻿namespace AdvGenCalculator
+using AdvGenCalculator.ViewModels;
+using AdvGenCalculator.Services;
+
+namespace AdvGenCalculator
 {
     public partial class MainPage : ContentPage
     {
-        private CalculatorViewModel _viewModel;
+        private readonly ICalculatorViewModel _viewModel;
 
+        // Constructor for DI
+        public MainPage(ICalculatorViewModel viewModel)
+        {
+            InitializeComponent();
+            _viewModel = viewModel;
+            BindingContext = _viewModel;
+        }
+
+        // Parameterless constructor for fallback
         public MainPage()
         {
             InitializeComponent();
-            _viewModel = new CalculatorViewModel();
+            // Create dependencies manually as fallback
+            var tokenizer = new ExpressionTokenizer();
+            var evaluator = new ShuntingYardExpressionEvaluator(tokenizer);
+            _viewModel = new ImprovedCalculatorViewModel(evaluator);
             BindingContext = _viewModel;
         }
 
@@ -24,5 +39,4 @@
             }
         }
     }
-
-   }
+}
